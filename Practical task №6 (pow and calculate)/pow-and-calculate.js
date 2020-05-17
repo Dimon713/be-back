@@ -49,9 +49,3 @@ function carryCalc(f) {
         }
     }
 }
-
-let pow = carryPowers(powers);
-console.log(pow(2)(-5));
-
-let calculate = carryCalc(calc);
-console.log(calculate(2)("/")(0));
