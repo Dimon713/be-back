@@ -1,0 +1,35 @@
+#calendar {
+    width: 225px;
+    border: 1px solid #909090;
+    border-collapse: collapse;
+    font-family: Arial;
+    font-size: 11px;
+}
+
+#calendar th {
+    text-align: center;
+    width: 26px;
+    height: 20px;
+    background: #D0D0D0;
+    color: #000000;
+    border: 1px solid #909090;
+}
+
+#calendar td {
+    text-align: center;
+    width: 20px;
+    height: 18px;
+    padding-right: 4px;
+    border: 1px solid #909090;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.mmYY {
+    text-align: right;
+    background: #D0D0D0;
+    color: #000000;
+    padding: 4px 5px;
+    font-family: Arial;
+    font-size: 12px;
+}
