@@ -1,0 +1,65 @@
+body {
+    background-color: #445566;
+}
+
+.calendar table {
+    width: 300px;
+    border-collapse: collapse;
+    border: 2px #dddddd solid;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.calendar tr {
+    height: 38px;
+}
+
+.calendar td {
+    width: 38px;
+    text-align: center;
+    border: 1px solid #787878;
+    font-size: 18px;
+    background-color: #eeeeee;
+    color: #424141;
+}
+
+.calendar table tr th {
+    border: 2px #dddddd solid;
+    text-align: center;
+    height: 26px;
+    background: #ee3333;
+    color: white;
+    font-size: 15px;
+}
+
+.btnLeftYear,
+.btnLeftMonth,
+.btnRightMonth,
+.btnRightYear {
+    border-radius: 5px;
+}
+
+.calendar td:nth-last-child(-n+2) {
+    background-color: #787878;
+    color: white;
+    border: 1px #dddddd solid;
+}
+
+.calendar table tr:nth-child(2) td {
+    background-color: #eeeeee;
+    color: #424141;
+    border: 1px solid #787878;
+}
+
+.calendar table tr td.white {
+    background-color: white;
+    color: #c1c1c1;
+}
+
+.calendar table tr:not(:nth-child(2)) td:hover {
+    background-color: cyan;
+}
+
+.calendar table tr td.active {
+    background-color: cyan;
+}
