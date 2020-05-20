@@ -1,92 +1,80 @@
 function createClock() {
+    document.body.style.margin = "0";
     let clock = document.getElementById("clock");
+    clock.style.width = "500px";
+    clock.style.height = "500px";
+    clock.style.position = "relative";
+    let widthClock = parseInt(clock.style.width);
+    let heightClock = parseInt(clock.style.height);
 
+    let circle = document.createElement("div");
+    clock.append(circle);
+    circle.style.width = `${widthClock}px`;
+    circle.style.height = `${heightClock}px`;
+    circle.style.borderRadius = `${widthClock > heightClock ? heightClock / 2 : widthClock / 2}px`;
+    circle.style.backgroundColor = "yellow";
+    circle.style.position = "absolute";
 
-
-
-
-
-
-    let svg = document.getElementById('clock');
-    let widthSvg = parseFloat(svg.getAttribute('width'));
-    let heightSvg = parseFloat(svg.getAttribute('height'));
-    const svgNS = 'http://www.w3.org/2000/svg';
-
-    let circle = document.createElementNS(svgNS, 'circle');
-    circle.setAttribute('cx', widthSvg / 2);
-    circle.setAttribute('cy', heightSvg / 2);
-    circle.setAttribute('r', widthSvg > heightSvg ? heightSvg / 2 : widthSvg / 2);
-    circle.setAttribute('fill', 'yellow');
-    circle.setAttribute('stroke', 'none');
-    svg.appendChild(circle);
     let BoundingClientRect = circle.getBoundingClientRect();
     let centerClockX = BoundingClientRect.left + BoundingClientRect.width / 2;
     let centerClockY = BoundingClientRect.top + BoundingClientRect.height / 2;
 
-    let digitalClock = document.createElementNS(svgNS, 'text');
-    digitalClock.setAttribute('x', centerClockX);
-    digitalClock.setAttribute('y', centerClockY * 0.6);
-    digitalClock.setAttribute('id', 'digitalClock');
-    digitalClock.setAttribute('font-size', 30);
-    digitalClock.setAttribute('text-anchor', 'middle');
-    digitalClock.setAttribute('dominant-baseline', 'central');
-    svg.appendChild(digitalClock);
-
     for (let i = 30; i <= 360; i += 30) {
-        let clockFace = document.createElementNS(svgNS, 'circle');
-        let axialRadiusDigits = 204;
-        let radiusDigits = 30;
-        let angleClockFace = i / 180 * Math.PI;
-        let clockFaceX = centerClockX + axialRadiusDigits * Math.sin(angleClockFace);
-        let clockFaceY = centerClockY - axialRadiusDigits * Math.cos(angleClockFace);
-        clockFace.setAttribute('cx', clockFaceX);
-        clockFace.setAttribute('cy', clockFaceY);
-        clockFace.setAttribute('r', radiusDigits);
-        clockFace.setAttribute('fill', 'green');
-        svg.appendChild(clockFace);
+        let clockFace = document.createElement("div");
+        circle.append(clockFace);
+        let axialRadiusDigits = widthClock * 0.4;
+        clockFace.style.width = `${widthClock / 10}px`;
+        clockFace.style.height = `${heightClock / 10}px`;
+        let radiusDigits = widthClock / 20;
+        clockFace.style.borderRadius = `${radiusDigits}px`;
+        clockFace.style.backgroundColor = "green";
+        clockFace.style.position = "absolute";
 
-        let text = document.createElementNS(svgNS, 'text');
-        text.setAttribute('x', clockFaceX);
-        text.setAttribute('y', clockFaceY);
-        text.textContent = i / 30;
-        text.setAttribute('font-size', 30);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dominant-baseline', 'central');
-        svg.appendChild(text);
+        let angleClockFace = 300 - i / 180 * Math.PI;
+        let clockFaceX = centerClockX + axialRadiusDigits * Math.sin(angleClockFace) - radiusDigits;
+        let clockFaceY = centerClockY - axialRadiusDigits * Math.cos(angleClockFace) - radiusDigits;
+        clockFace.style.top = `${clockFaceX}px`;
+        clockFace.style.left = `${clockFaceY}px`;
+        clockFace.innerHTML = i / 30;
+        clockFace.style.fontSize = "30px";
+        clockFace.style.textAlign = "center";
     }
 
-    let hoursHand = document.createElementNS(svgNS, 'line');
-    hoursHand.setAttribute('x1', centerClockX);
-    hoursHand.setAttribute('y1', centerClockY * 1.2);
-    hoursHand.setAttribute('x2', centerClockX);
-    hoursHand.setAttribute('y2', centerClockY * 0.4);
-    hoursHand.setAttribute('id', 'hoursHand');
-    hoursHand.setAttribute('stroke', 'black');
-    hoursHand.setAttribute('stroke-width', 10);
-    hoursHand.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(hoursHand);
+    let hoursHand = document.createElement("div");
+    hoursHand.setAttribute("id", "hoursHand");
+    circle.append(hoursHand);
+    hoursHand.style.width = `${widthClock/30}px`;
+    hoursHand.style.height = `${1.1*heightClock/4}px`;
+    hoursHand.style.borderRadius = `${widthClock/30}px`;
+    hoursHand.style.backgroundColor = "black";
+    hoursHand.style.position = "absolute";
+    hoursHand.style.transformOrigin = "center 90%";
+    hoursHand.style.top = `${centerClockX-heightClock/4}px`;
+    hoursHand.style.left = `${centerClockY - widthClock/60}px`;
 
-    let minuteHand = document.createElementNS(svgNS, 'line');
-    minuteHand.setAttribute('x1', centerClockX);
-    minuteHand.setAttribute('y1', centerClockY * 1.2);
-    minuteHand.setAttribute('x2', centerClockX);
-    minuteHand.setAttribute('y2', centerClockY * 0.2);
-    minuteHand.setAttribute('id', 'minuteHand');
-    minuteHand.setAttribute('stroke', 'black');
-    minuteHand.setAttribute('stroke-width', 6);
-    minuteHand.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(minuteHand);
+    let minuteHand = document.createElement("div");
+    minuteHand.setAttribute("id", "minuteHand");
+    circle.append(minuteHand);
+    minuteHand.style.width = `${widthClock/50}px`;
+    minuteHand.style.height = `${1.1*heightClock/3}px`;
+    minuteHand.style.borderRadius = `${widthClock/50}px`;
+    minuteHand.style.backgroundColor = "black";
+    minuteHand.style.position = "absolute";
+    minuteHand.style.transformOrigin = "center 90%";
+    minuteHand.style.top = `${centerClockX-heightClock/3}px`;
+    minuteHand.style.left = `${centerClockY - widthClock/100}px`;
 
-    let secondHand = document.createElementNS(svgNS, 'line');
-    secondHand.setAttribute('x1', centerClockX);
-    secondHand.setAttribute('y1', centerClockY * 1.2);
-    secondHand.setAttribute('x2', centerClockX);
-    secondHand.setAttribute('y2', centerClockY * 0.2);
-    secondHand.setAttribute('id', 'secondHand');
-    secondHand.setAttribute('stroke', 'red');
-    secondHand.setAttribute('stroke-width', 2);
-    secondHand.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(secondHand);
+    let secondHand = document.createElement("div");
+    secondHand.setAttribute("id", "secondHand");
+    circle.append(secondHand);
+    secondHand.style.width = `${widthClock/125}px`;
+    secondHand.style.height = `${1.1*heightClock/2.5}px`;
+    secondHand.style.borderRadius = `${widthClock/125}px`;
+    secondHand.style.backgroundColor = "red";
+    secondHand.style.position = "absolute";
+    secondHand.style.transformOrigin = "center 90%";
+    secondHand.style.top = `${centerClockX-heightClock/2.5}px`;
+    secondHand.style.left = `${centerClockY - widthClock/250}px`;
 }
 
 function moveHands() {
@@ -99,13 +87,9 @@ function moveHands() {
     let angleMinutes = minutes * 6;
     let angleSeconds = seconds * 6;
 
-    let widthSvg = parseFloat(document.getElementById('clock').getAttribute('width')) / 2;
-    let heightSvg = parseFloat(document.getElementById('clock').getAttribute('height')) / 2;
-
-    document.getElementById('digitalClock').textContent = currenTime.toLocaleTimeString();
-    document.getElementById('hoursHand').setAttribute('transform', `rotate(${angleHours} ${widthSvg} ${heightSvg})`);
-    document.getElementById('minuteHand').setAttribute('transform', `rotate(${angleMinutes} ${widthSvg} ${heightSvg})`);
-    document.getElementById('secondHand').setAttribute('transform', `rotate(${angleSeconds} ${widthSvg} ${heightSvg})`);
+    document.getElementById('hoursHand').style.transform = `rotate(${angleHours}deg)`;
+    document.getElementById('minuteHand').style.transform = `rotate(${angleMinutes}deg)`;
+    document.getElementById('secondHand').style.transform = `rotate(${angleSeconds}deg)`;
 }
 createClock();
 moveHands();
