@@ -12,15 +12,15 @@ let axialRadiusDigits = width / 2.5; //межцентровой радиус м�
 let radiusDigits = width / 15; //радиус малого круга
 let textSize = width / 15;
 
-let hoursLength = width / 3; //длина часовой стрелки
-let minutesLength = width / 2.2; //длина минутной стрелки
+let hoursLength = width / 4; //длина часовой стрелки
+let minutesLength = width / 3; //длина минутной стрелки
 let secondsLength = width / 2.2; //длина секундной стрелки
-let hoursLineWidth = width / 50; //толщина часовой стрелки
-let minutesLineWidth = width / 125; //толщина минутной стрелки
+let hoursLineWidth = width / 40; //толщина часовой стрелки
+let minutesLineWidth = width / 80; //толщина минутной стрелки
 let secondsLineWidth = width / 250; //толщина секундной стрелки
 
 let colorBlack = "black";
-let colorRed = "red";
+let colorBlackTransparent = "rgba(0,0,0,0.8)";
 let colorGreen = "green";
 let colorYellow = "yellow";
 
@@ -54,6 +54,9 @@ function drawLine(centerClockX, centerClockY, lineWidth, colorLine, Length, angl
     ctx.moveTo(centerClockX, centerClockY);
     ctx.lineTo(centerClockX + Length * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
         centerClockY - Length * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
+    ctx.moveTo(centerClockX, centerClockY);
+    ctx.lineTo(centerClockX - Length / 10 * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
+        centerClockY + Length / 10 * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
@@ -92,9 +95,9 @@ function drawClock() {
         drawText(clockFaceX, clockFaceY, text, colorBlack, textSize);
 
     }
-    drawLine(centerClockX, centerClockY, hoursLineWidth, colorBlack, hoursLength, angleHours);
-    drawLine(centerClockX, centerClockY, minutesLineWidth, colorBlack, minutesLength, angleMinutes);
-    drawLine(centerClockX, centerClockY, secondsLineWidth, colorRed, secondsLength, angleSeconds);
+    drawLine(centerClockX, centerClockY, hoursLineWidth, colorBlackTransparent, hoursLength, angleHours);
+    drawLine(centerClockX, centerClockY, minutesLineWidth, colorBlackTransparent, minutesLength, angleMinutes);
+    drawLine(centerClockX, centerClockY, secondsLineWidth, colorBlackTransparent, secondsLength, angleSeconds);
 
     drawDigitalClock(centerClockX, centerClockY, colorBlack, textSize)
 }
