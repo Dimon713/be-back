@@ -1,108 +1,70 @@
-let clock = document.getElementById('clock');
-clock.width = 500;
-clock.height = 500;
-let ctx = clock.getContext('2d');
-const centerClockX = clock.width / 2;
-const centerClockY = clock.height / 2;
-const width = clock.width;
-const height = clock.height;
-const pi = Math.PI;
+let clock = document.getElementById("clock");
+let ctx = clock.getContext("2d");
+let width = 500; //ширина полотна
+let height = 500; //высота полотна
+clock.width = width;
+clock.height = height;
+let centerClockX = clock.width / 2; //центр X
+let centerClockY = clock.height / 2; //центр Y
 
-let angleHours;
-let angleMinutes;
-let angleSeconds;
+let radiusClock = width / 2; //радиус большого круга
+let axialRadiusDigits = width / 2.5; //межцентровой радиус малых кругов
+let radiusDigits = width / 15; //радиус малого круга
+let textSize = width / 15;
 
-let hoursLength;
-let minutesLength;
-let secondsLength;
+let hoursLength = width / 3; //длина часовой стрелки
+let minutesLength = width / 2.2; //длина минутной стрелки
+let secondsLength = width / 2.2; //длина секундной стрелки
+let hoursLineWidth = width / 50; //толщина часовой стрелки
+let minutesLineWidth = width / 125; //толщина минутной стрелки
+let secondsLineWidth = width / 250; //толщина секундной стрелки
 
-function drawCircle() {
+let colorBlack = "black";
+let colorRed = "red";
+let colorGreen = "green";
+let colorYellow = "yellow";
+
+function drawCircle(centerClockX, centerClockY, radiusClock, colorCircleBorder, colorCircle) {
     ctx.beginPath();
-    let radiusClock = width / 2;
-    ctx.lineWidth = width / 250;
-    ctx.strokeStyle = 'yellow';
-    ctx.fillStyle = 'yellow';
-    ctx.arc(centerClockX, centerClockY, radiusClock, 0, 2 * pi);
+    ctx.strokeStyle = colorCircleBorder;
+    ctx.fillStyle = colorCircle;
+    ctx.arc(centerClockX, centerClockY, radiusClock, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
     ctx.closePath()
 }
 
-function drawClockFace() {
-    for (let i = 30; i <= 360; i += 30) {
-        let angleClockFace = i / 180 * Math.PI;
-        const axialRadiusDigits = width / 2.5;
-        let radiusDigits = width / 15;
-        let clockFaceX = centerClockX + axialRadiusDigits * Math.sin(angleClockFace);
-        let clockFaceY = centerClockY - axialRadiusDigits * Math.cos(angleClockFace);
-        let textSize = `${width/15}px`;
-
-        ctx.beginPath();
-        ctx.strokeStyle = 'green';
-        ctx.fillStyle = 'green';
-        ctx.lineWidth = 2;
-        ctx.arc(clockFaceX, clockFaceY, radiusDigits, 0, 2 * pi);
-        ctx.stroke();
-        ctx.fill();
-        ctx.closePath();
-
-        ctx.beginPath();
-        ctx.fillStyle = 'black';
-        ctx.lineWidth = 2;
-        ctx.textBaseline = 'middle';
-        ctx.font = `${textSize} Arial`;
-        ctx.textAlign = "center";
-        ctx.fillText(i / 30, clockFaceX, clockFaceY);
-        ctx.stroke();
-        ctx.fill();
-        ctx.closePath();
-    }
-}
-
-function drawHoursLength() {
+function drawText(x, y, text, textColor, textSize) {
     ctx.beginPath();
-    ctx.lineWidth = width / 50;
-    ctx.strokeStyle = 'black';
-    ctx.lineCap = 'round';
-    ctx.moveTo(centerClockX, centerClockY);
-    ctx.lineTo(centerClockX + hoursLength * Math.cos(pi / 2 - angleHours * (pi / 180)),
-        centerClockY - hoursLength * Math.sin(pi / 2 - angleHours * (pi / 180)));
+    ctx.fillStyle = textColor;
+    ctx.textBaseline = "middle";
+    ctx.font = `${textSize} Arial`;
+    ctx.textAlign = "center";
+    ctx.fillText(text, x, y);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
 }
 
-function drawMinutesLength() {
+function drawLine(centerClockX, centerClockY, lineWidth, colorLine, Length, angleHours) {
     ctx.beginPath();
-    ctx.lineWidth = width / 125;
-    ctx.strokeStyle = 'black';
-    ctx.lineCap = 'round';
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = colorLine;
+    ctx.lineCap = "round";
     ctx.moveTo(centerClockX, centerClockY);
-    ctx.lineTo(centerClockX + minutesLength * Math.cos(pi / 2 - angleMinutes * (pi / 180)),
-        centerClockY - minutesLength * Math.sin(pi / 2 - angleMinutes * (pi / 180)));
+    ctx.lineTo(centerClockX + Length * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
+        centerClockY - Length * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
 }
 
-function drawSecondsLength() {
+function drawDigitalClock(centerClockX, centerClockY, colorText, textSize) {
+    let currenTime = new Date();
     ctx.beginPath();
-    ctx.lineWidth = width / 250;
-    ctx.strokeStyle = 'red';
-    ctx.lineCap = 'round';
-    ctx.moveTo(centerClockX, centerClockY);
-    ctx.lineTo(centerClockX + secondsLength * Math.cos(pi / 2 - angleSeconds * (pi / 180)),
-        centerClockY - secondsLength * Math.sin(pi / 2 - angleSeconds * (pi / 180)));
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
-}
-
-function drawDigitalClock() {
-    ctx.beginPath();
-    ctx.fillStyle = 'black';
-    ctx.fillText(currenTime.toLocaleTimeString(), centerClockX, centerClockY * 0.6);
-    ctx.font = `${width/15}px Arial`;
+    ctx.fillStyle = colorText;
+    ctx.fillText(currenTime.toLocaleTimeString(), centerClockX, centerClockY / 2);
+    ctx.font = `${textSize}px Arial`;
     ctx.closePath();
 }
 
@@ -112,21 +74,29 @@ function drawClock() {
     let minutes = currenTime.getMinutes();
     let seconds = currenTime.getSeconds();
 
-    angleMinutes = minutes * 6;
-    angleSeconds = seconds * 6;
-    angleHours = (hours % 12) * 30 + minutes * 0
-    hoursLength = width / 3;
-    minutesLength = width / 2.2;
-    secondsLength = width / 2.2;
+    let angleMinutes = minutes * 6;
+    let angleSeconds = seconds * 6;
+    let angleHours = (hours % 12) * 30 + minutes * 0
 
     ctx.clearRect(0, 0, width, height);
 
-    drawCircle();
-    drawClockFace();
-    drawHoursLength();
-    drawMinutesLength();
-    drawSecondsLength();
-    drawDigitalClock();
+    drawCircle(centerClockX, centerClockY, radiusClock, colorYellow, colorYellow);
+
+    for (let i = 30; i <= 360; i += 30) {
+        let angleClockFace = i / 180 * Math.PI;
+        let clockFaceX = centerClockX + axialRadiusDigits * Math.sin(angleClockFace);
+        let clockFaceY = centerClockY - axialRadiusDigits * Math.cos(angleClockFace);
+        let text = i / 30;
+
+        drawCircle(clockFaceX, clockFaceY, radiusDigits, colorGreen, colorGreen);
+        drawText(clockFaceX, clockFaceY, text, colorBlack, textSize);
+
+    }
+    drawLine(centerClockX, centerClockY, hoursLineWidth, colorBlack, hoursLength, angleHours);
+    drawLine(centerClockX, centerClockY, minutesLineWidth, colorBlack, minutesLength, angleMinutes);
+    drawLine(centerClockX, centerClockY, secondsLineWidth, colorRed, secondsLength, angleSeconds);
+
+    drawDigitalClock(centerClockX, centerClockY, colorBlack, textSize)
 }
 
 setInterval(drawClock, 1000);
