@@ -38,7 +38,7 @@ function drawText(x, y, text, textColor, textSize) {
     ctx.beginPath();
     ctx.fillStyle = textColor;
     ctx.textBaseline = "middle";
-    ctx.font = `${textSize} Arial`;
+    ctx.font = `${textSize}px Arial`;
     ctx.textAlign = "center";
     ctx.fillText(text, x, y);
     ctx.stroke();
