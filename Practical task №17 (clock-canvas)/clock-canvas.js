@@ -79,7 +79,7 @@ function drawClock() {
 
     let angleMinutes = minutes * 6;
     let angleSeconds = seconds * 6;
-    let angleHours = (hours % 12) * 30 + minutes * 0
+    let angleHours = (hours % 12) * 30 + minutes * 0.5;
 
     ctx.clearRect(0, 0, width, height);
 
