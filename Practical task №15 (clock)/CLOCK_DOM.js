@@ -118,6 +118,7 @@ function moveHands() {
     document.getElementById('minuteHand').style.transform = `rotate(${angleMinutes}deg)`;
     document.getElementById('secondHand').style.transform = `rotate(${angleSeconds}deg)`;
 }
+
 createClock();
 moveHands();
 setInterval('moveHands()', 1000);
