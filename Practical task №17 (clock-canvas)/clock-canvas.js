@@ -24,12 +24,12 @@ let colorBlackTransparent = "rgba(0,0,0,0.8)";
 let colorGreen = "green";
 let colorYellow = "yellow";
 
-function drawCircle(centerClockX, centerClockY, radiusClock, colorCircleBorder, colorCircle) {
+function drawCircle(centerCircleX, centerCircleY, radiusCircle, colorCircleBorder, colorCircle) {
     ctx.beginPath();
     ctx.lineWidth = radiusClock / radiusClock;
     ctx.strokeStyle = colorCircleBorder;
     ctx.fillStyle = colorCircle;
-    ctx.arc(centerClockX, centerClockY, radiusClock, 0, 2 * Math.PI, false);
+    ctx.arc(centerCircleX, centerCircleY, radiusCircle, 0, 2 * Math.PI, false);
     ctx.stroke();
     ctx.fill();
     ctx.closePath()
@@ -47,27 +47,27 @@ function drawText(x, y, text, textColor, textSize) {
     ctx.fill();
 }
 
-function drawLine(centerClockX, centerClockY, lineWidth, colorLine, Length, angleHours) {
+function drawLine(centerX, centerY, lineWidth, colorLine, Length, angleHours) {
     ctx.beginPath();
     ctx.lineWidth = lineWidth;
     ctx.strokeStyle = colorLine;
     ctx.lineCap = "round";
-    ctx.moveTo(centerClockX, centerClockY);
-    ctx.lineTo(centerClockX + Length * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
-        centerClockY - Length * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
-    ctx.moveTo(centerClockX, centerClockY);
-    ctx.lineTo(centerClockX - Length / 10 * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
-        centerClockY + Length / 10 * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX + Length * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
+        centerY - Length * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX - Length / 10 * Math.cos(Math.PI / 2 - angleHours * (Math.PI / 180)),
+        centerY + Length / 10 * Math.sin(Math.PI / 2 - angleHours * (Math.PI / 180)));
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
 }
 
-function drawDigitalClock(centerClockX, centerClockY, colorText, textSize) {
+function drawDigitalClock(centerX, centerY, colorText, textSize) {
     let currenTime = new Date();
     ctx.beginPath();
     ctx.fillStyle = colorText;
-    ctx.fillText(currenTime.toLocaleTimeString(), centerClockX, centerClockY / 2);
+    ctx.fillText(currenTime.toLocaleTimeString(), centerX, centerY / 2);
     ctx.font = `${textSize}px Arial`;
     ctx.closePath();
 }
