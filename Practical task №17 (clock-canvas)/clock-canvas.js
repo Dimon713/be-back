@@ -26,9 +26,10 @@ let colorYellow = "yellow";
 
 function drawCircle(centerClockX, centerClockY, radiusClock, colorCircleBorder, colorCircle) {
     ctx.beginPath();
+    ctx.lineWidth = radiusClock / radiusClock;
     ctx.strokeStyle = colorCircleBorder;
     ctx.fillStyle = colorCircle;
-    ctx.arc(centerClockX, centerClockY, radiusClock, 0, 2 * Math.PI);
+    ctx.arc(centerClockX, centerClockY, radiusClock, 0, 2 * Math.PI, false);
     ctx.stroke();
     ctx.fill();
     ctx.closePath()
@@ -42,8 +43,8 @@ function drawText(x, y, text, textColor, textSize) {
     ctx.textAlign = "center";
     ctx.fillText(text, x, y);
     ctx.stroke();
-    ctx.fill();
     ctx.closePath();
+    ctx.fill();
 }
 
 function drawLine(centerClockX, centerClockY, lineWidth, colorLine, Length, angleHours) {
