@@ -1,16 +1,17 @@
 function getCounter(x) {
-    let result = x;
+    this.result = x;
     return {
-        log: () => {
-            console.log(result)
+        log: function() {
+            console.log(result);
+            return this;
         },
-        count: (y) => {
+        count: function(y) {
             result += y;
+            return this;
         },
-        reset: () => {
+        reset: function() {
             result = 0;
+            return this;
         }
     }
 }
-
-var counter = getCounter(5);
