@@ -1,18 +1,39 @@
 function createClock() {
-    document.body.style.margin = "0";
+    document.body.style.margin = 0;
     let clock = document.getElementById("clock");
-    clock.style.width = "500px";
-    clock.style.height = "500px";
-    clock.style.position = "relative";
-    let widthClock = parseInt(clock.style.width);
-    let heightClock = parseInt(clock.style.height);
+    let widthClock = 500;
+    let heightClock = 500;
+    let borderRadius = widthClock > heightClock ? heightClock / 2 : widthClock / 2;
+    let axialRadiusDigits = widthClock * 0.4;
+    let clockFaceWidth = widthClock / 10;
+    let clockFaceHeight = heightClock / 10;
+    let radiusDigits = widthClock / 20;
+    let fontSize = widthClock / 15;
+    let hoursHandWidth = widthClock / 30;
+    let hoursHandHalfWidth = widthClock / 60;
+    let hoursHandHeight = 1.1 * heightClock / 4;
+    let hoursRadius = heightClock / 4;
+    let hoursHandBorderRadius = widthClock / 30;
+    let minuteHandWidth = widthClock / 50;
+    let minuteHandHeight = 1.1 * heightClock / 3;
+    let minuteHandBorderRadius = widthClock / 50;
+    let minuteRadius = heightClock / 3;
+    let minuteHandHalfWidth = widthClock / 100;
+    let secondHandWidth = widthClock / 125;
+    let secondHandHeight = 1.1 * heightClock / 2.5;
+    let secondHandBorderRadius = widthClock / 125;
+    let secondRadius = heightClock / 2.5;
+    let secondHandHalfWidth = widthClock / 250;
 
+    clock.style.width = `${widthClock}px`;
+    clock.style.height = `${heightClock}px`;
+    clock.style.position = "relative";
 
     let circle = document.createElement("div");
     clock.append(circle);
     circle.style.width = `${widthClock}px`;
     circle.style.height = `${heightClock}px`;
-    circle.style.borderRadius = `${widthClock > heightClock ? heightClock / 2 : widthClock / 2}px`;
+    circle.style.borderRadius = `${borderRadius}px`;
     circle.style.backgroundColor = "yellow";
     circle.style.position = "absolute";
 
@@ -23,14 +44,12 @@ function createClock() {
     for (let i = 30; i <= 360; i += 30) {
         let clockFace = document.createElement("div");
         circle.append(clockFace);
-        let axialRadiusDigits = widthClock * 0.4;
-        clockFace.style.width = `${widthClock / 10}px`;
-        clockFace.style.height = `${heightClock / 10}px`;
-        let radiusDigits = widthClock / 20;
+        clockFace.style.width = `${clockFaceWidth}px`;
+        clockFace.style.height = `${clockFaceHeight}px`;
+
         clockFace.style.borderRadius = `${radiusDigits}px`;
         clockFace.style.backgroundColor = "green";
         clockFace.style.position = "absolute";
-
         let angleClockFace = 300 - i / 180 * Math.PI;
         let clockFaceX = centerClockX + axialRadiusDigits * Math.sin(angleClockFace) - radiusDigits;
         let clockFaceY = centerClockY - axialRadiusDigits * Math.cos(angleClockFace) - radiusDigits;
@@ -38,52 +57,51 @@ function createClock() {
         clockFace.append(div);
         clockFace.style.top = `${clockFaceX}px`;
         clockFace.style.left = `${clockFaceY}px`;
-        clockFaceHeight = clockFace.style.height;
         div.innerHTML = i / 30;
         div.style.width = "100%";
         div.style.position = "absolute";
         div.style.top = "50%";
         div.style.marginTop = "-0.625em";
         div.style.textAlign = "center";
-        clockFace.style.fontSize = `${widthClock/15}px`;
+        clockFace.style.fontSize = `${fontSize}px`;
         clockFace.style.textAlign = "center";
     }
 
     let hoursHand = document.createElement("div");
-    hoursHand.setAttribute("id", "hoursHand");
+    hoursHand.id = "hoursHand";
     circle.append(hoursHand);
-    hoursHand.style.width = `${widthClock / 30}px `;
-    hoursHand.style.height = `${1.1 * heightClock / 4}px `;
-    hoursHand.style.borderRadius = `${widthClock / 30}px `;
+    hoursHand.style.width = `${hoursHandWidth}px `;
+    hoursHand.style.height = `${hoursHandHeight}px `;
+    hoursHand.style.borderRadius = `${hoursHandBorderRadius}px `;
     hoursHand.style.backgroundColor = "black";
     hoursHand.style.position = "absolute";
     hoursHand.style.transformOrigin = "center 90%";
-    hoursHand.style.top = `${centerClockX - heightClock / 4}px `;
-    hoursHand.style.left = `${centerClockY - widthClock / 60}px `;
+    hoursHand.style.top = `${centerClockX - hoursRadius}px `;
+    hoursHand.style.left = `${centerClockY - hoursHandHalfWidth}px `;
 
     let minuteHand = document.createElement("div");
-    minuteHand.setAttribute("id", "minuteHand");
+    minuteHand.id = "minuteHand";
     circle.append(minuteHand);
-    minuteHand.style.width = `${widthClock / 50}px `;
-    minuteHand.style.height = `${1.1 * heightClock / 3}px `;
-    minuteHand.style.borderRadius = `${widthClock / 50}px `;
+    minuteHand.style.width = `${minuteHandWidth}px `;
+    minuteHand.style.height = `${minuteHandHeight}px `;
+    minuteHand.style.borderRadius = `${minuteHandBorderRadius}px `;
     minuteHand.style.backgroundColor = "black";
     minuteHand.style.position = "absolute";
     minuteHand.style.transformOrigin = "center 90%";
-    minuteHand.style.top = `${centerClockX - heightClock / 3}px `;
-    minuteHand.style.left = `${centerClockY - widthClock / 100}px `;
+    minuteHand.style.top = `${centerClockX - minuteRadius}px `;
+    minuteHand.style.left = `${centerClockY - minuteHandHalfWidth}px `;
 
     let secondHand = document.createElement("div");
-    secondHand.setAttribute("id", "secondHand");
+    secondHand.id = "secondHand";
     circle.append(secondHand);
-    secondHand.style.width = `${widthClock / 125}px `;
-    secondHand.style.height = `${1.1 * heightClock / 2.5}px `;
-    secondHand.style.borderRadius = `${widthClock / 125}px `;
+    secondHand.style.width = `${secondHandWidth}px `;
+    secondHand.style.height = `${secondHandHeight}px `;
+    secondHand.style.borderRadius = `${secondHandBorderRadius}px `;
     secondHand.style.backgroundColor = "red";
     secondHand.style.position = "absolute";
     secondHand.style.transformOrigin = "center 90%";
-    secondHand.style.top = `${centerClockX - heightClock / 2.5}px `;
-    secondHand.style.left = `${centerClockY - widthClock / 250}px `;
+    secondHand.style.top = `${centerClockX - secondRadius}px `;
+    secondHand.style.left = `${centerClockY - secondHandHalfWidth}px `;
 }
 
 function moveHands() {
