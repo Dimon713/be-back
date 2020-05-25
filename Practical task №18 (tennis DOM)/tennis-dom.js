@@ -245,7 +245,7 @@ function startGame() {
     stopGame();
     racquet1.top = heigthCourt / 2 - heightRacquet / 2;
     racquet2.top = heigthCourt / 2 - heightRacquet / 2;
-    timerId = setInterval(moveObject, 40);
+    timerId = setInterval(moveObject, 25);
 };
 
 function stopGame() {
