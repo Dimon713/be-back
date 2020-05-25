@@ -2,7 +2,7 @@ function getCounter(x) {
     this.result = x;
     return {
         log: function() {
-            console.log(result);
+            console.log(this.result);
             return this;
         },
         count: function(y) {
