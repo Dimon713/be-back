@@ -9,7 +9,7 @@ const fontSizeScore = 50;
 const widthRacquet = 15;
 const heightRacquet = 150;
 const leftRacquet2Start = 685;
-const widthBall = heightBall = 50;
+const widthBall = heightBall = 40;
 let timerId;
 
 function createField() {

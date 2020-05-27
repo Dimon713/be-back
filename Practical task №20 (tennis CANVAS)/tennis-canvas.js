@@ -10,7 +10,7 @@ const fontSizeBtn = 20;
 const fontSizeScore = 50;
 const widthRacquet = 15;
 const heightRacquet = 150;
-const radiusBall = 50;
+const radiusBall = 40;
 let toggle;
 
 
