@@ -13,13 +13,13 @@ const widthBall = heightBall = 50;
 let timerId;
 
 function createField() {
-    let tennis = document.createElement('div');
+    let tennis = document.createElement("div");
     tennis.id = "tennis";
     tennis.style.width = `${width}px`;
     tennis.style.height = `${height}px`;
     tennis.style.display = "block";
 
-    let court = document.createElement('div');
+    let court = document.createElement("div");
     court.id = "court";
     court.style.width = `${widthCourt}px`;
     court.style.height = `${heigthCourt}px`;
@@ -28,7 +28,7 @@ function createField() {
     court.style.display = "block";
     court.style.position = "relative";
 
-    let btn = document.createElement('input');
+    let btn = document.createElement("input");
     btn.id = "btn";
     btn.type = "button";
     btn.value = "старт!";
