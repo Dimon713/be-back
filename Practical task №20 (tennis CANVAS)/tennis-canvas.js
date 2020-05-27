@@ -10,7 +10,7 @@ const fontSizeBtn = 20;
 const fontSizeScore = 50;
 const widthRacquet = 15;
 const heightRacquet = 150;
-const radiusBall = 40;
+const diameterBall = 40;
 let toggle;
 
 
@@ -119,7 +119,7 @@ let racquet2 = {
 let ball = {
     top: canvasGameLayerHeight / 2,
     left: canvasGameLayerWidth / 2,
-    radius: radiusBall / 2,
+    radius: diameterBall / 2,
     speedX: 0,
     speedY: 0,
     update: function() {
