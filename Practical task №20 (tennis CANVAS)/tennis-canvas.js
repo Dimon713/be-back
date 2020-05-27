@@ -268,7 +268,6 @@ function clearAll() {
 window.onload = function() {
     createField();
     drawField();
-    clearAll();
     racquet1.update();
     racquet2.update();
     ball.update();
