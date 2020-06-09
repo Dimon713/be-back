@@ -37,6 +37,8 @@ function WheatherWidget(_cityID) {
 
     this.getWeatherOneDay = function() {
         let btn = document.createElement("input");
+        let oneDay = document.querySelector(".one_day");
+        let loading = document.createElement('img');
         btn.setAttribute("type", "button");
         btn.setAttribute("class", "btn_3days")
         btn.value = "Погода на 3 дня";
@@ -55,6 +57,9 @@ function WheatherWidget(_cityID) {
         if (!this.cityID) {
             this.cityID = 625144;
         }
+        loading.setAttribute("class", "loading");
+        loading.setAttribute("src", "loading.gif");
+        oneDay.append(loading);
         fetch(this.apiUrl + "/weather?id=" + this.cityID + "&units=metric&lang=ru&appid=" + this.apiKey)
             .then(data => {
                 if (data.status !== 200) {
