@@ -8,19 +8,20 @@ body {
 
 .main {
     width: 300px;
-    min-height: 182px;
+    min-height: 162px;
     border-radius: 10px;
     padding: 10px;
-    box-sizing: border-box;
     background-image: url(sky.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    margin: 0 5px;
 }
 
 .wheather_widget {
     position: relative;
+    width: 300px;
 }
 
 .btn_close {

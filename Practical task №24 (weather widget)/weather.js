@@ -3,37 +3,37 @@ function WheatherWidget(_cityID) {
     this.apiUrl = "https://api.openweathermap.org/data/2.5/";
     this.apiKey = "3c966ee6b5888b4a370c2ce761f0584f";
 
-    let body = document.querySelector("body");
-    body.innerHTML = "<div class='main'><div class='wheather_widget'><div class='dd_mm_yyyy'></div><div class='one_day'></div><div class='three_days'></div></div></div></div>";
-
-    let wheatherWidget = document.querySelector(".wheather_widget");
-    let btnClose = document.createElement("input");
-    btnClose.setAttribute("type", "button");
-    btnClose.value = "x";
-    btnClose.setAttribute("class", "btn_close");
-    wheatherWidget.append(btnClose);
-
-    btnClose.onclick = function() {
+    this.create = function() {
         let main = document.querySelector(".main");
-        main.remove();
+        main.innerHTML = "<div class='wheather_widget'><div class='dd_mm_yyyy'></div><div class='one_day'></div><div class='three_days'></div></div>";
+        let wheatherWidget = document.querySelector(".wheather_widget");
+        let btnClose = document.createElement("input");
+        btnClose.setAttribute("type", "button");
+        btnClose.value = "x";
+        btnClose.setAttribute("class", "btn_close");
+        wheatherWidget.append(btnClose);
+
+        btnClose.onclick = function() {
+            let main = document.querySelector(".main");
+            main.remove();
+        }
+
+        let dateNow = document.querySelector('.dd_mm_yyyy');
+        let date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        if (day < 10) {
+            day = '0' + day
+        };
+        if (month < 10) {
+            month = '0' + month
+        };
+        if (year < 10) {
+            year = '0' + year
+        };
+        dateNow.innerHTML = "Сегодня: " + day + "." + month + "." + year;
     }
-
-    let dateNow = document.querySelector('.dd_mm_yyyy');
-    let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    if (day < 10) {
-        day = '0' + day
-    };
-    if (month < 10) {
-        month = '0' + month
-    };
-    if (year < 10) {
-        year = '0' + year
-    };
-    dateNow.innerHTML = "Сегодня: " + day + "." + month + "." + year;
-
     this.getWeatherOneDay = function() {
         let btn = document.createElement("input");
         btn.setAttribute("type", "button");
@@ -134,6 +134,7 @@ function WheatherWidget(_cityID) {
     }
 
     this.getWeather = function() {
+        this.create();
         this.getWeatherOneDay();
     }
 }
