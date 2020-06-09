@@ -34,6 +34,7 @@ function WheatherWidget(_cityID) {
         };
         dateNow.innerHTML = "Сегодня: " + day + "." + month + "." + year;
     }
+
     this.getWeatherOneDay = function() {
         let btn = document.createElement("input");
         btn.setAttribute("type", "button");
