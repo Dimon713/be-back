@@ -62,11 +62,6 @@ function WheatherWidget(_cityID) {
                     return;
                 }
                 data.json().then(data => {
-                    let oneDay = document.querySelector(".one_day");
-                    let loading = document.createElement('img');
-                    loading.setAttribute("class", "loading");
-                    loading.setAttribute("src", "loading.gif");
-                    oneDay.append(loading);
                     renderOneDay(data);
                 });
             })
@@ -97,12 +92,12 @@ function WheatherWidget(_cityID) {
                     console.log('Что - то пошло не так: ' + data.status);
                     return;
                 }
+                let threeDays = document.querySelector(".three_days");
+                let loading = document.createElement('img');
+                loading.setAttribute("class", "loading");
+                loading.setAttribute("src", "loading.gif");
+                threeDays.append(loading);
                 data.json().then(data => {
-                    let threeDays = document.querySelector(".three_days");
-                    let loading = document.createElement('img');
-                    loading.setAttribute("class", "loading");
-                    loading.setAttribute("src", "loading.gif");
-                    threeDays.append(loading);
                     let weatherThreeDaysAhead = [];
                     data.list.forEach(element => {
                         if (element.dt_txt[11] + element.dt_txt[12] == 12) {
