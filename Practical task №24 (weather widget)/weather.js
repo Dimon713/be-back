@@ -86,17 +86,17 @@ function WheatherWidget(_cityID) {
         if (!this.cityID) {
             this.cityID = 625144;
         }
+        let threeDays = document.querySelector(".three_days");
+        let loading = document.createElement('img');
+        loading.setAttribute("class", "loading");
+        loading.setAttribute("src", "loading.gif");
+        threeDays.append(loading);
         fetch(this.apiUrl + "/forecast?id=" + this.cityID + "&units=metric&lang=ru&appid=" + this.apiKey)
             .then(data => {
                 if (data.status !== 200) {
                     console.log('Что - то пошло не так: ' + data.status);
                     return;
                 }
-                let threeDays = document.querySelector(".three_days");
-                let loading = document.createElement('img');
-                loading.setAttribute("class", "loading");
-                loading.setAttribute("src", "loading.gif");
-                threeDays.append(loading);
                 data.json().then(data => {
                     let weatherThreeDaysAhead = [];
                     data.list.forEach(element => {
@@ -106,7 +106,7 @@ function WheatherWidget(_cityID) {
                             }
                         }
                     });
-                    setTimeout(renderThreeDays, 200, weatherThreeDaysAhead);
+                    renderThreeDays(weatherThreeDaysAhead)
                 });
             })
             .catch(error => console.error("Ошибка получение погоды. Причина: " + error));
