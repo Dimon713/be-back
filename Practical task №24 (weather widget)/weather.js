@@ -110,7 +110,7 @@ function WheatherWidget(_cityID) {
                             }
                         }
                     });
-                    renderThreeDays(weatherThreeDaysAhead);
+                    setTimeout(renderThreeDays, 200, weatherThreeDaysAhead);
                 });
             })
             .catch(error => console.error("Ошибка получение погоды. Причина: " + error));
