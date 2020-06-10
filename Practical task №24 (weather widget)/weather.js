@@ -78,8 +78,8 @@ function WheatherWidget(_cityID) {
             let oneDay = document.querySelector(".one_day");
             let out = "";
             out += "<ul>";
-            out += `<li>Город: ${data.name}</li>`;
-            out += `<li class="temp">${data.main.temp}${"&#8451"}</li>`;
+            out += `<li class="city">Город: ${data.name}</li>`;
+            out += `<li class="temp">${Math.round(data.main.temp)}${"&#8451"}</li>`;
             out += `<li><img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png"></img></li>`;
             out += `<li>${data.weather[0]["description"]}</li>`;
             out += `<li>Ветер: ${data.wind.speed} м/с</li>`;
@@ -87,7 +87,75 @@ function WheatherWidget(_cityID) {
             oneDay.innerHTML = out;
             oneDay.append(btn);
         }
+
+        oneDay.onclick = (e) => {
+            let li = document.querySelector(".city");
+            let select = document.createElement("select");
+            select.setAttribute("class", "select_city");
+            select.innerHTML = "<option>Брест</option><option>Витебск</option><option>Гомель</option><option>Гродно</option><option>Минск</option><option>Могилёв</option>"
+            switch (e.target.innerHTML.slice(7)) {
+                case "Брест":
+                    select.value = "Брест";
+                    break;
+                case "Витебск":
+                    select.value = "Витебск";
+                    break;
+                case "Gomel’":
+                    select.value = "Гомель";
+                    break;
+                case "Гродно":
+                    select.value = "Гродно";
+                    break;
+                case "Минск":
+                    select.value = "Минск";
+                    break;
+                case "Могилёв":
+                    select.value = "Могилёв";
+                    break;
+            }
+            if (e.target.classList[0] === "city") {
+                li.innerHTML = "Город: ";
+                li.append(select);
+            }
+            select.onblur = () => {
+                let select = document.querySelector(".select_city");
+                switch (select.value) {
+                    case "Брест":
+                        this.cityID = 629634;
+                        update();
+                        break;
+                    case "Витебск":
+                        this.cityID = 620127;
+                        update();
+                        break;
+                    case "Гомель":
+                        this.cityID = 627907;
+                        update();
+                    case "Гродно":
+                        this.cityID = 627904;
+                        update();
+                        break;
+                    case "Минск":
+                        this.cityID = 625143;
+                        update();
+                        break;
+                    case "Могилёв":
+                        this.cityID = 625665;
+                        update();
+                        break;
+                }
+            }
+            let it = this;
+
+            function update() {
+                it.getWeatherOneDay();
+                let threeDays = document.querySelector(".three_days");
+                threeDays.innerHTML = "";
+                btn.value = "Погода на 3 дня";
+            }
+        }
     }
+
 
     this.getWeatherThreeDay = function() {
         if (!this.cityID) {
