@@ -2,6 +2,14 @@ function WheatherWidget(_cityID) {
     this.cityID = _cityID;
     this.apiUrl = "https://api.openweathermap.org/data/2.5/";
     this.apiKey = "3c966ee6b5888b4a370c2ce761f0584f";
+    this.city = {
+        "Брест": 629634,
+        "Витебск": 620127,
+        "Гомель": 627907,
+        "Гродно": 627904,
+        "Минск": 625143,
+        "Могилёв": 625665,
+    }
 
     this.create = function() {
         let main = document.querySelector(".main");
@@ -59,7 +67,7 @@ function WheatherWidget(_cityID) {
         }
 
         if (!this.cityID) {
-            this.cityID = 625144;
+            this.cityID = this.city["Минск"];
         }
 
         fetch(this.apiUrl + "/weather?id=" + this.cityID + "&units=metric&lang=ru&appid=" + this.apiKey)
@@ -121,26 +129,26 @@ function WheatherWidget(_cityID) {
                 let select = document.querySelector(".select_city");
                 switch (select.value) {
                     case "Брест":
-                        this.cityID = 629634;
+                        this.cityID = this.city["Брест"];
                         update();
                         break;
                     case "Витебск":
-                        this.cityID = 620127;
+                        this.cityID = this.city["Витебск"];
                         update();
                         break;
                     case "Гомель":
-                        this.cityID = 627907;
+                        this.cityID = this.city["Гомель"];
                         update();
                     case "Гродно":
-                        this.cityID = 627904;
+                        this.cityID = this.city["Гродно"];
                         update();
                         break;
                     case "Минск":
-                        this.cityID = 625143;
+                        this.cityID = this.city["Минск"];
                         update();
                         break;
                     case "Могилёв":
-                        this.cityID = 625665;
+                        this.cityID = this.city["Могилёв"];
                         update();
                         break;
                 }
@@ -159,7 +167,7 @@ function WheatherWidget(_cityID) {
 
     this.getWeatherThreeDay = function() {
         if (!this.cityID) {
-            this.cityID = 625144;
+            this.cityID = this.city["Минск"];
         }
         let threeDays = document.querySelector(".three_days");
         let loading = document.createElement('img');
