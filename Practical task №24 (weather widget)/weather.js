@@ -164,7 +164,6 @@ function WheatherWidget(_cityID) {
         }
     }
 
-
     this.getWeatherThreeDay = function() {
         if (!this.cityID) {
             this.cityID = this.city["Минск"];
