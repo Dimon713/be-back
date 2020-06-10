@@ -39,27 +39,29 @@ function WheatherWidget(_cityID) {
         let btn = document.createElement("input");
         let oneDay = document.querySelector(".one_day");
         let loading = document.createElement('img');
+        oneDay.innerHTML = "";
         btn.setAttribute("type", "button");
         btn.setAttribute("class", "btn_3days")
         btn.value = "Погода на 3 дня";
+        loading.setAttribute("class", "loading");
+        loading.setAttribute("src", "loading.gif");
+        oneDay.append(loading);
 
         btn.onclick = () => {
             this.getWeatherThreeDay();
             btn.value = "скрыть";
             btn.onclick = () => {
-                this.getWeatherOneDay();
                 let threeDays = document.querySelector(".three_days");
                 threeDays.innerHTML = "";
                 btn.value = "Погода на 3 дня";
+                this.getWeatherOneDay();
             }
         }
 
         if (!this.cityID) {
             this.cityID = 625144;
         }
-        loading.setAttribute("class", "loading");
-        loading.setAttribute("src", "loading.gif");
-        oneDay.append(loading);
+
         fetch(this.apiUrl + "/weather?id=" + this.cityID + "&units=metric&lang=ru&appid=" + this.apiKey)
             .then(data => {
                 if (data.status !== 200) {
